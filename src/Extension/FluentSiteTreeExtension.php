@@ -46,7 +46,14 @@ class FluentSiteTreeExtension extends FluentVersionedExtension
      */
     protected function updateMetaTags(&$tags)
     {
-        $tags .= $this->owner->renderWith('FluentSiteTree_MetaTags');
+        //$tags .= $this->owner->renderWith('FluentSiteTree_MetaTags');
+        $extra = $this->owner->renderWith('FluentSiteTree_MetaTags');
+
+        if (is_array($tags)) {
+            $tags = array_merge($tags, (array)$extra);
+        } else {
+            $tags .= $extra;
+        }
     }
 
     /**
